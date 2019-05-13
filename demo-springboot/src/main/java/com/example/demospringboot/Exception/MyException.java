@@ -1,5 +1,7 @@
 package com.example.demospringboot.Exception;
 
+import com.example.demospringboot.enums.ExceptionStatusEnum;
+
 public class MyException extends RuntimeException{
     private  String code;
     private  String message;
@@ -13,9 +15,9 @@ public class MyException extends RuntimeException{
         return message;
     }
 
-    public MyException(String message, String code,Throwable tb) {
+    public MyException(ExceptionStatusEnum es, Throwable tb) {
         super(tb.getMessage(),tb);
-        this.code = code;
-        this.message = message;
+        this.code = es.getCode();
+        this.message = es.getMessage();
     }
 }

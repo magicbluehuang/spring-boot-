@@ -1,6 +1,7 @@
 package com.example.demospringboot.controller;
 
 import com.example.demospringboot.Exception.MyException;
+import com.example.demospringboot.enums.ExceptionStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class DemoTest {
         try {
             System.out.println(bb[2]);
         }catch (Exception e){
-            throw  new MyException("角标越界", "0000",e);
+            throw  new MyException(ExceptionStatusEnum.INDEX_OUT,e);
         }
         model.setViewName("test.html");
         log.info("success");
