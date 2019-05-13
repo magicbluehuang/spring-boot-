@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +19,11 @@ import java.util.Map;
 @Slf4j
 public class RestControllerException {
 
+    /**
+     * 描述：自定义异常捕获
+     * @param
+     * @return json
+     */
     @ExceptionHandler(value=MyException.class)
     public Map<String, String> responseException(MyException me) {
         log.error(me.getMessage(), me);
@@ -30,6 +34,11 @@ public class RestControllerException {
         return resultException;
     }
 
+    /**
+     * 描述：其他异常捕获
+     * @param me
+     * @return
+     */
     @ExceptionHandler(value = Exception.class)
     public Map<String, String> responseCommonException(Exception me) {
         log.error(me.getMessage(), me);

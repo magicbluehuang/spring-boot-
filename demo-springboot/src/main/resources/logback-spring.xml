@@ -22,7 +22,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>D:/test/info-%d.log</fileNamePattern>
+            <fileNamePattern>/logs/info-%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 
@@ -35,7 +35,7 @@
             <pattern>%d -- %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>D:/test/error-%d.log</fileNamePattern>
+            <fileNamePattern>/logs/error-%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 
