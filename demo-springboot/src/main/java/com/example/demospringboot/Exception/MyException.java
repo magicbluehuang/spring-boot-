@@ -2,6 +2,9 @@ package com.example.demospringboot.Exception;
 
 import com.example.demospringboot.enums.ExceptionStatusEnum;
 
+/**
+ * 自定义异常
+ */
 public class MyException extends RuntimeException{
     private  String code;
     private  String message;
