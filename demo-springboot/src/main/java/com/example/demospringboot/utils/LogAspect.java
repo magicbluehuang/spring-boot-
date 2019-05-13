@@ -7,11 +7,14 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
- * Created by Administrator on 2018/11/5.
+ * reated by Administrator on 2018/11/5.C
  * springboot+aop切点记录请求和响应信息
  */
 @Component
@@ -33,8 +36,9 @@ public class LogAspect {
 
     @Around(value = "log()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Object result = null;
-        StringBuilder sbLog = new StringBuilder("\n");
+        StringBuilder sbLog = new StringBuilder("\n"+request.getRequestURL()+"\r\n");
         try {
             sbLog.append(String.format("类名：%s\r\n", proceedingJoinPoint.getTarget().getClass().getName()));
 
