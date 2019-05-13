@@ -15,12 +15,12 @@ public class DemoTest {
 
     @GetMapping("/test")
     public ResponseBody test(ModelAndView model){
-//        String [] bb = new String[1];
-//        try {
-//            System.out.println(bb[2]);
-//        }catch (Exception e){
-//            throw  new MyException(ExceptionStatusEnum.INDEX_OUTOF,e);
-//        }
+        String [] bb = new String[1];
+        try {
+            System.out.println(bb[2]);
+        }catch (Exception e){
+            throw  new MyException(ExceptionStatusEnum.INDEX_OUTOF,e);
+        }
         model.setViewName("test.html");
         log.info("success");
         log.error("error");

@@ -15,7 +15,9 @@
         </layout>
     </appender>
 
+    <!--只收集info级别的消息-->
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--过滤掉error级别的日志-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!--要拦截的日志级别-->
             <level>ERROR</level>
@@ -34,6 +36,7 @@
         </rollingPolicy>
     </appender>
 
+    <!--只收集error级别消息-->
     <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--添加 范围 过滤-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">

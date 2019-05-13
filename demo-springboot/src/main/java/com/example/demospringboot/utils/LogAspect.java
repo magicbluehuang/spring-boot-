@@ -1,6 +1,8 @@
 package com.example.demospringboot.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demospringboot.Exception.MyException;
+import com.example.demospringboot.enums.ExceptionStatusEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -11,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
@@ -36,9 +39,12 @@ public class LogAspect {
 
     @Around(value = "log()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        //获取HttpServletRequest对象
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+//        获取HttpServletResponse对象
+//        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         Object result = null;
-        StringBuilder sbLog = new StringBuilder("\n"+request.getRequestURL()+"\r\n");
+        StringBuilder sbLog = new StringBuilder("\n" + request.getRequestURL() + "\r\n");
         try {
             sbLog.append(String.format("类名：%s\r\n", proceedingJoinPoint.getTarget().getClass().getName()));
 
@@ -51,16 +57,15 @@ public class LogAspect {
             }
 
             long startTime = System.currentTimeMillis();
-            result = proceedingJoinPoint.proceed();
             long endTime = System.currentTimeMillis();
             sbLog.append(String.format("返回：%s\r\n", JSON.toJSON(result)));
             sbLog.append(String.format("耗时：%ss", endTime - startTime));
         } catch (Exception ex) {
-            sbLog.append(String.format("异常：%s", ex.getMessage()));
+            throw  new MyException(ExceptionStatusEnum.SYSTEM_ERRO,ex);
         } finally {
             logger.info(sbLog.toString());
         }
-        return result;
+        return proceedingJoinPoint.proceed();
     }
 
     //注解切点
@@ -94,7 +99,7 @@ public class LogAspect {
             sbLog.append(String.format("返回：%s\r\n", JSON.toJSON(result)));
             sbLog.append(String.format("耗时：%ss", endTime - startTime));
         } catch (Exception ex) {
-            sbLog.append(String.format("异常：%s", ex.getMessage()));
+           throw  new MyException(ExceptionStatusEnum.SYSTEM_ERRO,ex);
         } finally {
             logger.info(sbLog.toString());
         }

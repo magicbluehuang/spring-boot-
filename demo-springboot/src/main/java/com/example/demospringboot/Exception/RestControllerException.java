@@ -1,5 +1,7 @@
 package com.example.demospringboot.Exception;
 
+import com.example.demospringboot.utils.ResponseBody;
+import com.example.demospringboot.utils.ResponseBodyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,13 +27,9 @@ public class RestControllerException {
      * @return json
      */
     @ExceptionHandler(value=MyException.class)
-    public Map<String, String> responseException(MyException me) {
-        log.error(me.getMessage(), me);
-        HashMap<String, String> resultException = new HashMap<>();
-        resultException.put("code", me.getCode());
-        resultException.put("message", me.getMessage());
-        resultException.put("desc", me.getCause()==null ? "": me.getCause().getClass()+":"+me.getCause().getMessage());
-        return resultException;
+    public ResponseBody responseException(MyException es) {
+        log.error(es.getMessage(), es);
+        return ResponseBodyUtil.exeption(es);
     }
 
     /**
