@@ -7,3 +7,7 @@ logging:
     level: info #info ,debug
     path: D://test
     appname: logweb
+
+#http://127.0.0.1:(port)/swagger-ui.html
+swagger:
+  enabled: true

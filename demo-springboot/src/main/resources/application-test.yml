@@ -1,2 +1,10 @@
 server:
   port: 8089
+
+logging:
+  config: classpath:logback-spring.xml
+  logback:
+    level: info #info ,debug
+    path: D://test
+    appname: logweb
+

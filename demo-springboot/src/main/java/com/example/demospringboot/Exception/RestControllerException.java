@@ -3,6 +3,9 @@ package com.example.demospringboot.Exception;
 import com.example.demospringboot.utils.ResponseBody;
 import com.example.demospringboot.utils.ResponseBodyUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +36,20 @@ public class RestControllerException {
     }
 
     /**
+     * 描述：@RequestBody @Validated 此两个注解验证参数才有效果
+     * @param
+     * @return json
+     */
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    public Map<String, String> validExceptionHander(MethodArgumentNotValidException e){
+        BindingResult bindingResult =e.getBindingResult();
+        HashMap<String, String> resultException = new HashMap<>();
+        resultException.put("code", "002");
+        resultException.put("message",  bindingResult.getAllErrors().get(0).getDefaultMessage());
+        return resultException;
+    }
+
+    /**
      * 描述：其他异常捕获
      * @param me
      * @return
@@ -45,4 +62,5 @@ public class RestControllerException {
         resultException.put("message", me.getMessage());
         return resultException;
     }
+
 }
