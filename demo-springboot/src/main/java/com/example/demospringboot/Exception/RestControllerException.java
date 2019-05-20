@@ -3,7 +3,6 @@ package com.example.demospringboot.Exception;
 import com.example.demospringboot.utils.ResponseBody;
 import com.example.demospringboot.utils.ResponseBodyUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

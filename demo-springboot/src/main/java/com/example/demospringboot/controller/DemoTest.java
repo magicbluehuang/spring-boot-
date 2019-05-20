@@ -1,6 +1,6 @@
 package com.example.demospringboot.controller;
 
-import com.example.demospringboot.mode.Student;
+import com.example.demospringboot.model.Student;
 import com.example.demospringboot.utils.ResponseBody;
 import com.example.demospringboot.utils.ResponseBodyUtil;
 import io.swagger.annotations.Api;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Api(tags = "DEMO001 分类测试")
+@Api(tags = {"DEMO001 分类测试"})
 @RestController
 public class DemoTest {
 
@@ -25,6 +25,7 @@ public class DemoTest {
 //        }catch (Exception e){
 //            throw  new MyException(ExceptionStatusEnum.INDEX_OUTOF,e);
 //        }
+        log.info("student:"+student);
         return ResponseBodyUtil.success(student);
     }
 }
