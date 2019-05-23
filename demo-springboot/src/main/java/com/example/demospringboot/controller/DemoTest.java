@@ -1,7 +1,7 @@
 package com.example.demospringboot.controller;
 
 import com.example.demospringboot.model.Student;
-import com.example.demospringboot.utils.ResponseBody;
+import com.example.demospringboot.common.ResponseBody;
 import com.example.demospringboot.utils.ResponseBodyUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

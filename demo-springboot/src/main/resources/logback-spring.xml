@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
+
    <!--springboot配置文件中的值-->
     <springProperty scope="context" name="appname" source="logging.logback.appname"/>
     <springProperty scope="context" name="logLevel" source="logging.logback.level"/>

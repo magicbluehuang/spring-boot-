@@ -1,12 +1,14 @@
 package com.example.demospringboot.Exception;
 
 import com.example.demospringboot.enums.ExceptionStatusEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * 自定义异常
  */
 @Getter
+@AllArgsConstructor
 public class MyException extends RuntimeException{
     private  String code;
     private  String message;

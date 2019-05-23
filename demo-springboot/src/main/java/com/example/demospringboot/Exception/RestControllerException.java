@@ -1,6 +1,6 @@
 package com.example.demospringboot.Exception;
 
-import com.example.demospringboot.utils.ResponseBody;
+import com.example.demospringboot.common.ResponseBody;
 import com.example.demospringboot.utils.ResponseBodyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -30,7 +30,7 @@ public class RestControllerException {
      */
     @ExceptionHandler(value=MyException.class)
     public ResponseBody responseException(MyException es) {
-        log.error(es.getMessage(), es);
+        log.info(es.getMessage(), es);
         return ResponseBodyUtil.exeption(es);
     }
 

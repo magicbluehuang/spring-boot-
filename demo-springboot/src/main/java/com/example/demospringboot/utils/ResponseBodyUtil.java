@@ -1,6 +1,7 @@
 package com.example.demospringboot.utils;
 
 import com.example.demospringboot.Exception.MyException;
+import com.example.demospringboot.common.ResponseBody;
 
 public class ResponseBodyUtil {
 

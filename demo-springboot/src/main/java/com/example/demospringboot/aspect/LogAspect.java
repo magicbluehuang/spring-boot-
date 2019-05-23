@@ -1,8 +1,9 @@
-package com.example.demospringboot.utils;
+package com.example.demospringboot.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demospringboot.Exception.MyException;
 import com.example.demospringboot.enums.ExceptionStatusEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,7 +16,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
 
 /**
  * reated by Administrator on 2018/11/5.C
@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
  */
 @Component
 @Aspect
+@Slf4j
 public class LogAspect {
 
     //切点入口 Controller包下面所有类的所有方法
@@ -41,26 +42,25 @@ public class LogAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 //        获取HttpServletResponse对象
 //        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        StringBuilder sbLog = new StringBuilder("\n" + request.getRequestURL() + "\r\n");
+        log.info("************************************************************************");
+        log.info("请求接口："+request.getRequestURL().toString());
         try {
-            sbLog.append(String.format("类名：%s\r\n", proceedingJoinPoint.getTarget().getClass().getName()));
-
+            log.info(String.format("类名：%s", proceedingJoinPoint.getTarget().getClass().getName()));
             MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
-            sbLog.append(String.format("方法：%s\r\n", methodSignature.getMethod().getName()));
+            log.info(String.format("方法：%s", methodSignature.getMethod().getName()));
 
             Object[] args = proceedingJoinPoint.getArgs();
             for (Object o : args) {
-                sbLog.append(String.format("参数：%s\r\n", JSON.toJSON(o)));
+                log.info(String.format("参数：%s", JSON.toJSON(o)));
             }
 
             long startTime = System.currentTimeMillis();
             long endTime = System.currentTimeMillis();
-            sbLog.append(String.format("返回：%s\r\n", JSON.toJSON( proceedingJoinPoint.proceed())));
-            sbLog.append(String.format("耗时：%ss", endTime - startTime));
+            log.info(String.format("返回：%s", JSON.toJSON( proceedingJoinPoint.proceed())));
+            log.info(String.format("耗时：%ss", endTime - startTime));
+            log.info("************************************************************************");
         } catch (Exception ex) {
             throw  new MyException(ExceptionStatusEnum.SYSTEM_ERRO,ex);
-        } finally {
-            logger.info(sbLog.toString());
         }
         return proceedingJoinPoint.proceed();
     }

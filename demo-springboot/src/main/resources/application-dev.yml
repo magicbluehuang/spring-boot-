@@ -7,6 +7,9 @@ logging:
     level: info #info ,debug
     path: D://test
     appname: logweb
+  #显示执行sql
+  level:
+    com.example.demospringboot.dao: debug
 
 #访问地址http://127.0.0.1:(port)/swagger-ui.html
 swagger:

@@ -5,6 +5,7 @@ package com.example.demospringboot.enums;
  */
 public enum ExceptionStatusEnum {
     INDEX_OUTOF("001","角标越界"),
+    SIGNATURE_EXCEPTION("002","验签失败"),
     SYSTEM_ERRO("999","系统异常"),
     ;
 
